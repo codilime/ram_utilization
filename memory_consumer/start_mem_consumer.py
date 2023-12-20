@@ -1,6 +1,7 @@
 """
 Creates and runs MemConsumer with arguments.
 """
+import os
 from datetime import datetime
 import argparse
 from memory_consumer.mem_consumer import MemPattern, MemConsumerParams, MemConsumer
@@ -72,8 +73,16 @@ def main():
 
     ram_profile = MemPattern(args.pattern_file, args.noise_percent)
 
+    # max_ram_mega can be set in env and has precedence over args.max_ram_mega
+
+    max_ram_mega = int(os.getenv('MAX_RAM_MEGA', args.max_ram_mega))
+    if max_ram_mega != args.max_ram_mega:
+        print(f"-m, --max_ram_mega argument {args.max_ram_mega} "
+              f"has been overwritten by variable MAX_RAM_MEGA={max_ram_mega}")
+    if max_ram_mega < 100:
+        parser.error("-m, --max_ram_mega argument >= 100")
     ram_consumer_params = MemConsumerParams(
-        args.max_ram_mega,
+        max_ram_mega,
         args.time_slot_sec,
         args.slope_linear_trend,
         args.start_from_beginning,

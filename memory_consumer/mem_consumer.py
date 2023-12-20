@@ -88,7 +88,8 @@ class MemConsumer:
             f"linear trend slope {self.mc_params.linear_trend_slope}, "
             f"start from pattern beginning: {self.mc_params.start_from_beginning}, "
             f"duration: {duration_str}\n"
-            f"MemConsumer: initial allocation: {self.__correction * self.chunk_size_mega}MB, "
+            f"MemConsumer: initial allocation (minimum allocated memory): "
+            f"{self.__correction * self.chunk_size_mega}MB, "
             f"correction rest: {self.__correction_rest}MB"
         )
 
@@ -117,7 +118,7 @@ class MemConsumer:
     def os_allocated_memory_mega(self) -> int:
         """Returns memory allocated for the process in MB, rounded to ten of MB."""
         process = psutil.Process(os.getpid())
-        return int(round(process.memory_info()[1] // MEGA, -1))
+        return int(round(process.memory_info()[1] // MEGA, 0))
 
     def mem_array_allocated_memory_mega(self) -> int:
         """Returns memory allocated for the process in internal memory array in MB."""
