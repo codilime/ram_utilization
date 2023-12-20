@@ -373,6 +373,11 @@ No roadmap at the moment.
 ## Authors and acknowledgment
 The author of this code is Tomasz Janaszka (tomasz.janaszka@codilime.com), CodiLime (codilime.com).
 
+## External free libraries used
+- [psutil](https://github.com/giampaolo/psutil)  
+  - Copyright (c) 2009, Jay Loden, Dave Daeschler, Giampaolo Rodola All rights reserved. 
+  - [BSD 3-Clause License](https://github.com/giampaolo/psutil/blob/master/LICENSE)
+
 ## License
 [MIT](LICENSE)
 
